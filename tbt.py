@@ -7,10 +7,10 @@ except: #Downloading requests module if not found
     import requests
 
 ##Comment the next 4 lines (select then Alt+3) after running it for the first time    
-print("All required modules sucessfully downloaded")
-dummy=input("Press any key to exit..")
-sys.stdout.close()
-os._exit(0)
+##print("All required modules sucessfully downloaded")
+##dummy=input("Press any key to exit..")
+##sys.stdout.close()
+##os._exit(0)
 
 def Telegram_Notify(bot_message,bot_token,bot_chatID): #Sending a text msg through a telegram bot
     bot_message = bot_message.replace('+',"(PlusSign)")
@@ -128,7 +128,7 @@ try:
                 if DataType == "":
                     file_id = item["message"]["video"]["file_id"] #Checking if video recieved
                     DataType = "video"
-                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the photo file and getting its name
+                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the video file and getting its name
         except:
             pass
 
@@ -136,7 +136,7 @@ try:
                 if DataType == "":
                     file_id = item["message"]["audio"]["file_id"] #Checking if audio recieved
                     DataType = "audio"
-                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the photo file and getting its name
+                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the audio file and getting its name
         except:
             pass
 
