@@ -149,6 +149,15 @@ try:
             pass
 
         try:
+                if DataType == "":
+                    lat = item["message"]["location"]["latitude"] #Checking if latitude recieved
+                    lon = item["message"]["location"]["longitude"] #Checking if longitude recieved
+                    DataType = "location"
+                    print("{}#{}@{},{}".format(DataType,chat_id,lat,lon))
+        except:
+            pass
+
+        try:
                 UNICODE = False
                 if DataType == "":
                     message = item["message"]["text"] #Recieving a text msg
