@@ -162,7 +162,7 @@ try:
                 if DataType == "":
                     message = item["message"]["text"] #Recieving a text msg
                     for letters in message: #Checking if the msg is in Unicode
-                        if ord(letters) >= 127:
+                        if ord(letters) > 127:
                             UNICODE = True
                             break
                     if UNICODE: #Formatting the msg if in Unicode in the form of <BotToken>[ASCII1,ASCII2,....]
