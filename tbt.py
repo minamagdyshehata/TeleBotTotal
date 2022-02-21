@@ -18,6 +18,18 @@ def Telegram_Notify(bot_message,bot_token,bot_chatID): #Sending a text msg throu
     response = requests.get(send_text)
     print(response.status_code)
 
+def Telegram_QO(bot_message,bot_token,bot_chatID): #Sending a Question with preset answers msg through a telegram bot
+    bot_message = bot_message.replace('+',"(PlusSign)")
+    qolist = bot_message.split(",")
+    Buttons = ''
+    reply_markup = '{"keyboard":[['
+    for items in qolist[1:]:
+        Buttons = Buttons + '"' + items + '",'
+    reply_markup = reply_markup + Buttons[:-1] + ']]}'
+    send_text = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&parse_mode=Markdown&text={}&one_time_keyboard=False&resize_keyboard=False&reply_markup={}'.format(bot_token,bot_chatID,qolist[0],reply_markup)
+    response = requests.get(send_text)
+    print(response.status_code)
+
 def Telegram_file(file,caption,bot_token,bot_chatID): #Sending a document through a telegram bot
     files = {"document":open(file,"rb")}
     file_request = 'https://api.telegram.org/bot{}/sendDocument?chat_id={}&caption={}'.format(bot_token,bot_chatID,caption)
@@ -38,10 +50,11 @@ def Telegram_getfile(bot_token,file_id): #Recieving a file from a telegram bot
 Bot_token = ''
 if len(sys.argv) == 2:
     if sys.argv[1] == "-h" or sys.argv[1] == "--help" or sys.argv[1] == "/?": #Showing help menu
-        print("{}-h or --help                             Show help menu.{}".format(chr(10),chr(10))+
-              "<BotToken>                               Gets the next update.{}".format(chr(10))+
-              "<BotToken> msg <ChatID> <TextMessage>    Sends a text message to a specific Chat ID.{}".format(chr(10))+
-              "<BotToken> doc <ChatID> <FilePath>       Sends a document to a specific Chat ID.{}".format(chr(10)))
+        print("{}-h or --help                                              Show help menu.{}".format(chr(10),chr(10))+
+              "<BotToken>                                                Gets the next update.{}".format(chr(10))+
+              "<BotToken> msg <ChatID> <TextMessage>                     Sends a text message to a specific Chat ID.{}".format(chr(10))+
+              "<BotToken> qop <ChatID> <Question,Option1,Option2,..>     Sends a question with options for answers to a specific Chat ID.{}".format(chr(10))+
+              "<BotToken> doc <ChatID> <FilePath>                        Sends a document to a specific Chat ID.{}".format(chr(10)))
         sys.stdout.close()
         os._exit(0)
     else:
@@ -55,6 +68,14 @@ if len(sys.argv) > 2:
             for item in sys.argv[4:]:
                 message = message + item + " "
             Telegram_Notify(message,Bot_token,ChatID)
+            sys.stdout.close()
+            os._exit(0)
+        elif sys.argv[2] == "qop": #Question with options
+            ChatID = sys.argv[3]
+            message = ''
+            for item in sys.argv[4:]:
+                message = message + item + " "
+            Telegram_QO(message,Bot_token,ChatID)
             sys.stdout.close()
             os._exit(0)
         elif sys.argv[2] == "doc": #Document
@@ -72,9 +93,7 @@ if len(sys.argv) > 2:
         print("Something went wrong!!{}Please check the help menu..{}{}".format(chr(10),chr(10),chr(10))) #Something went wrong error msg (request failed due to wrong Token for example)
         sys.stdout.close()
         os._exit(0)
-#Setting variables for the offset request (to recieve a new msg each time)
-#prev_msg_id = 0
-#offset = 0
+
 getUpdates_url = 'https://api.telegram.org/bot{}/getUpdates'.format(Bot_token) #getupdates URL
 
 try:
@@ -107,6 +126,22 @@ try:
 
         try:
                 if DataType == "":
+                    file_id = item["message"]["video"]["file_id"] #Checking if video recieved
+                    DataType = "video"
+                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the photo file and getting its name
+        except:
+            pass
+
+        try:
+                if DataType == "":
+                    file_id = item["message"]["audio"]["file_id"] #Checking if audio recieved
+                    DataType = "audio"
+                    print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the photo file and getting its name
+        except:
+            pass
+
+        try:
+                if DataType == "":
                     file_id = item["message"]["document"]["file_id"] #Checking if document recieved
                     DataType = "document"
                     print("{}#{}@{}".format(DataType,chat_id,Telegram_getfile(Bot_token,file_id))) #Downloading the document file and getting its name
@@ -118,13 +153,16 @@ try:
                 if DataType == "":
                     message = item["message"]["text"] #Recieving a text msg
                     for letters in message: #Checking if the msg is in Unicode
-                        if ord(letters) > 128:
+                        if ord(letters) >= 127:
                             UNICODE = True
                             break
                     if UNICODE: #Formatting the msg if in Unicode in the form of <BotToken>[ASCII1,ASCII2,....]
                         UNICODEmsg = Bot_token + "["
-                        for l in message:
-                            UNICODEmsg = UNICODEmsg + str(ord(l)) + ","
+                        for letter in message:
+                            if ord(letter) >= 1632 and ord(letter) <= 1641:
+                                UNICODEmsg = UNICODEmsg + str(ord(letter) - 1584) + ","
+                            else:
+                                UNICODEmsg = UNICODEmsg + str(ord(letter)) + ","
                         UNICODEmsg = UNICODEmsg [:-1] + "]"
                         message = UNICODEmsg
                     DataType = "text"
