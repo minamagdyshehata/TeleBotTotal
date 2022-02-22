@@ -158,6 +158,28 @@ try:
             pass
 
         try:
+                if DataType == "":
+                    first_name = ""
+                    last_name = ""
+                    try:
+                        first_name = item["message"]["contact"]["first_name"] #Checking if first_name recieved
+                    except:
+                        pass
+                    try:
+                        last_name = item["message"]["contact"]["last_name"] #Checking if last_name recieved
+                    except:
+                        pass
+                    vcard = item["message"]["contact"]["vcard"] #Checking if vcard recieved
+                    vcf_file = first_name.replace(" ","") + last_name.replace(" ","") + ".vcf"
+                    f = open(vcf_file, "w")
+                    f.write(vcard)
+                    f.close()
+                    DataType = "contact"
+                    print("{}#{}@{}".format(DataType,chat_id,vcf_file))
+        except:
+            pass
+
+        try:
                 UNICODE = False
                 if DataType == "":
                     message = item["message"]["text"] #Recieving a text msg
