@@ -3,7 +3,7 @@ A python tool that makes it easy to build a telegram bot.
 
 I am a big fan of telegram bots and that is why I wrote that tool, hoping that it helps other programmers to built their own bots in whatever language they prefer.
 
-My idea is to call tbt.py via command line with the Bot_Token as an argument and it returns the update weather it's text,voice,video,audio,location,document or photo.
+My idea is to call tbt.py via command line with the Bot_Token as an argument and it returns the update weather it's text,contact,voice,video,audio,location,document or photo.
 
 It can also send a text messages or a documents to a specific Chat ID.
 
@@ -26,7 +26,7 @@ The tool will always return the update in the following form:
  
              DataType#ChatID@Content
 
-Content will be the file name saved in the same directory if the DataType is [photo,video,audio,document or voice].
+Content will be the file name saved in the same directory if the DataType is [photo,contact,video,audio,document or voice].
 
 Content will be in the form of lat,lon if the DataType is [location].
 
