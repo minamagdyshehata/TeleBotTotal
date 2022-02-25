@@ -40,6 +40,6 @@ then some string manipulation will be needed to retrieve the unicode message.
 
 I wrote another script using tbt.py to recieve all updates recieved by a telegram bot. I also explained step by step how to retrieve a unicode message (You can do the same algorithm with your prefered programming language).
 
-I hope this tool makes it eazier for everyone to built their own Telegram bots. Enjoy!!
+I hope this tool makes it easier for everyone to built their own Telegram bots. Enjoy!!
 
         
