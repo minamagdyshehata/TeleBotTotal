@@ -40,9 +40,11 @@ In visual studio you might need to install Newtonsoft.Json by going to Tools>>Nu
              
 then hit Enter, this package is needed to allow tbt.dll to deal with data in JSON format.
 
-You will also find here a VB.net project of my version of a Telegram Bot interface that uses tbt.dll, feel free to modify as per your needs.
+You will also find a VB.net project of my version of a Telegram Bot interface that uses tbt.dll on the following link, feel free to modify as per your needs.
 
-If you find this project helpful, i will really appreciate you donation on PayPal:
+  [MyTeleBotVB.NET on GoogleDrive](https://drive.google.com/file/d/1ym0Utu9UKmrwzkKgIEbjsghkJVdj2Fc3/view?usp=sharing)
+
+If you find this project helpful, i will really appreciate you donation on my PayPal:
 
   [My PayPal Donation page <3](https://www.paypal.com/donate/?hosted_button_id=DSKMZNGFWLM2W)
              
