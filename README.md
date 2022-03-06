@@ -5,7 +5,7 @@ I am a big fan of telegram bots and that is why I wrote that module, hoping that
 
 tbt.py can be imported to any python script to use it's functions as shown in tbtUsage.py.
 
-it returns the update weather it's text,contact,voice,video,audio,location,document or photo.
+it returns the update whether it's text,contact,voice,video,audio,location,document or photo.
 
 It can also send a text messages, Qop or a documents to a specific Chat ID.
 
