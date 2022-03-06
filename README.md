@@ -46,7 +46,7 @@ You will also find a VB.net project of my version of a Telegram Bot interface th
   
 Inside the VB.net project folder you will find a folder named "FinalPublish" that contains a standalone version of the EXE file.
 
-If you find this project helpful, i would really appreciate you donation on my PayPal:
+If you find this project helpful, i would really appreciate your donation on my PayPal:
   
   [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/donate?hosted_button_id=29JX5NN5E6BAS)
 
