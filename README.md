@@ -1,28 +1,28 @@
 ## TeleBotTotal
-A python tool that makes it easy to build a telegram bot.
+A python module that makes it easy to build a telegram bot.
 
-I am a big fan of telegram bots and that is why I wrote that tool, hoping that it helps other programmers to built their own bots in whatever language they prefer.
+I am a big fan of telegram bots and that is why I wrote that module, hoping that it helps other programmers to built their own bots.
 
-My idea is to call tbt.py via command line with the Bot_Token as an argument and it returns the update weather it's text,contact,voice,video,audio,location,document or photo.
+tbt.py can be imported to any python script to use it's functions as shown in tbtUsage.py.
 
-It can also send a text messages or a documents to a specific Chat ID.
+it returns the update weather it's text,contact,voice,video,audio,location,document or photo.
 
-Here is the help menu :
+It can also send a text messages, Qop or a documents to a specific Chat ID.
 
-              -h or --help                                              Show help menu.
+Here are the functions :
+
               
-              <BotToken>                                                Gets the next update.
+              GetUpdates(Bot_Token)                                 Gets the next update.
               
-              <BotToken> msg <ChatID> <TextMessage>                     Sends a text message to a specific Chat ID.
+              SendMsg(Bot_Token,Chat_Id,message)                    Sends a text message to a specific Chat ID.
               
-              <BotToken> qop <ChatID> <Question,Option1,Option2,..>     Sends a question with options for answers to a specific Chat ID.
+              SendQop(Bot_Token,Chat_Id,qop)                        Sends a question with options to a specific Chat ID. qop is in the form of "Q?,OP1,OP2,.."    
               
-              <BotToken> doc <ChatID> <FilePath>                        Sends a document to a specific Chat ID.
+              SendFile(Bot_Token,Chat_Id,file_path,file_caption)    Sends a document to a specific Chat ID.
               
                 
-To use the script for the first time, run it without any arguments as it will check for needed modules and download anything that is missing. Then you can comment lines 10,11,12 and 13.
 
-The tool will always return the update in the following form:
+The module will always return the update in the following form:
  
              DataType#ChatID@Content
 
@@ -32,14 +32,20 @@ Content will be in the form of lat,lon if the DataType is [location].
 
 Content will be the actual text message if the DataType is [text].
 
-Incase the recieved text contains a unicode character the returned update will look like that:
+I also wrote the same module in VB.net as tbt.dll, with the same functions. tbt.dll can be added as a reference in visual studio to be used.
 
-            DataType#ChatID@Bot_Token[ASCII1,ASCII2,ASCII3,....]
-            
-then some string manipulation will be needed to retrieve the unicode message.
+In visual studio you might need to install Newtonsoft.Json by going to Tools>>NuGet Package Manager>>Package Manager Console then type:
 
-I wrote another script using tbt.py to recieve all updates recieved by a telegram bot. I also explained step by step how to retrieve a unicode message (You can do the same algorithm with your prefered programming language).
+             install-package Newtonsoft.Json
+             
+then hit Enter, this package is needed to allow tbt.dll to deal with data in JSON format.
 
-I hope this tool makes it easier for everyone to built their own Telegram bots. Enjoy!!
+You will also find here a VB.net project of my version of a Telegram Bot interface that uses tbt.dll, feel free to modify as per your needs.
+
+If you find this project helpful, i will really appreciate you donation on PayPal:
+
+  [My PayPal Donation page <3](https://www.paypal.com/donate/?hosted_button_id=DSKMZNGFWLM2W)
+             
+Happy Programming :):)
 
         
